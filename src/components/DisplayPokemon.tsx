@@ -61,8 +61,8 @@ export function DisplayPokemon() {
                     <button className="bg-red-500 rounded-full text-red-500 h-2 w-2 mx-2 border-2 border-black" disabled= {true}>⠀</button>
                 </div>
                 
-                <div className="bg-gray-900 b rounded-md flex justify-center">
-                    <img src={ pokemonData.sprites.other.official_artwork.front_default } alt= {"Foto: "+ pokemonData.name} className="min-w-0 min-h-0 h-32 w-32" />
+                <div className="rounded-md flex justify-center bg-img-pokemon p-2">
+                    <img src={ pokemonData.sprites.other.official_artwork.front_default } alt= {"Foto: "+ pokemonData.name} className="h-32 w-32" />
                 </div>
 
                 <div className="grid grid-cols-3 justify-center mt-2">

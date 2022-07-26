@@ -2,35 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(#0000, green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-img-pokemon {
+    background-image: url(./assets/Oaks-Lab.png);
+    background-position: center;
+    background-size: 100% 100%;
+}
+
 .case-internal {
     border: 1px solid black;
     margin-bottom: 0px;
 }
 
 .case-3d {
-    width: 95%;
     padding: 0rem 1rem 0.75rem 0rem;
     position:relative; 
     border:1px solid black; display: inline-block;
-    border-radius: 5px 5px 1rem 0;
-}
-
-.case-3d:before {
-    position:absolute;
-    left:-1px;
-    bottom:-1px;
-    content:'';
-    border-bottom: 1rem solid black;
-    border-right: 1rem solid transparent;
-}
-
-.case-3d:after {
-    position:absolute;
-    left:-2px;
-    bottom:-2px;
-    content:'';
-    border-bottom: 1rem solid white;
-    border-right: 1rem solid transparent;
+    border-radius: 5px;
 }
 
 .led {
