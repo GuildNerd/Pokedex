@@ -1,57 +1,75 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useCallback, useEffect, useState } from "react";
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import TypeDisplay from "./BottomButtons/TypeDisplay";
 
-var basePokemon = {
-    name: 'bulbasaur',
-    id: 1,
-    types: [
-        {
-            type: {
-                name: 'grass',
-            },
-        }
-    ],
+type pokemonModel = {
+    name: string,
+    id: number,
+    types: [ { type: { name: string, }, } ],
     sprites: {
         other: {
             official_artwork: {
-                front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'
+                front_default: string
             }
         },
-        front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-        back_default: ''
+        front_default: string,
+        back_default: string
     }
 };
 
 export function DisplayPokemon() {
-    const [countNumPokemon, setNumPokemon] = useState(1);
+    const basePokemon: pokemonModel = {
+        name: 'bulbasaur',
+        id: 1,
+        types: [ { type: { name: 'grass', }, } ],
+        sprites: {
+            other: {
+                official_artwork: {
+                    front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'
+                }
+            },
+            front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+            back_default: ''
+        }
+    };
+
     const [pokemonData, setPokemonData] = useState(basePokemon);
 
-    async function handleDecrNumPokemon() {
-
-        if(countNumPokemon > 0) {
-            setNumPokemon(basePokemon.id - 1);
-            console.log(countNumPokemon);
-            await getPokemonData(countNumPokemon);
-            setPokemonData(basePokemon);
+    async function handlePrevPokemon() {
+        if(pokemonData.id > 1) {
+            await getPokemonData(pokemonData.id - 1)
+            .then((data) => {
+                const returnedPokemon:pokemonModel = data;
+                setPokemonData(returnedPokemon);
+            });
         }
     }
 
-    async function handleAddNumPokemon() {
-        setNumPokemon(basePokemon.id + 1);
-        console.log(countNumPokemon);
-        await getPokemonData(countNumPokemon);
-        setPokemonData(basePokemon);
+    async function handleNextPokemon() {
+        await getPokemonData(pokemonData.id + 1)
+        .then((data) => {
+            const returnedPokemon:pokemonModel = data;
+            setPokemonData(returnedPokemon);
+        });
     }
 
-    async function getPokemonData(numPokemon: number) {
+    const getPokemonData = useCallback(async (numPokemon: number) => {
+        var pokemon:pokemonModel = basePokemon;
+
         await fetch(`https://pokeapi.co/api/v2/pokemon/${numPokemon}`)
         .then((resposta) => resposta.json())
-        .then((data) => { 
-            basePokemon = data;
-            basePokemon.sprites.other.official_artwork = data.sprites.other['official-artwork'];
+        .then((data) => {
+            pokemon = data;
+            pokemon.sprites.other.official_artwork = data.sprites.other['official-artwork'];
+            return pokemon;
         })
-    }
+        return pokemon;
+    }, []);
+
+    useEffect(() => {
+        getPokemonData(pokemonData.id);
+    }, [pokemonData, pokemonData.id]);
 
     return(
         <div>
@@ -72,14 +90,12 @@ export function DisplayPokemon() {
             </div>
             
             <div className="flex flex-row gap-4 mt-4">
-                <div className="flex-1 border-black border-2 bg-green-400 rounded-md p-2">
-                    <p>{ pokemonData.types[0].type.name.charAt(0).toUpperCase() + pokemonData.types[0].type.name.substring(1) }</p>
-                </div>
+                <TypeDisplay typeName={pokemonData.types[0].type.name}/>
                 <div className="flex flex-1 gap-4 justify-center bg-gray-300 rounded-lg px-0 py-1">
-                    <button onClick={ handleDecrNumPokemon }>
+                    <button onClick={ handlePrevPokemon }>
                         <ArrowCircleLeftIcon className="text-gray-900" fontSize="large"/>
                     </button>
-                    <button onClick={ handleAddNumPokemon }>
+                    <button onClick={ handleNextPokemon }>
                         <ArrowCircleRightIcon className="text-gray-900" fontSize="large"/>
                     </button>
                 </div>
