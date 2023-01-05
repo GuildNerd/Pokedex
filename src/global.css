@@ -25,7 +25,6 @@ body {
 
 .case-3d {
     padding: 0rem 1rem 0.75rem 0rem;
-    position:relative; 
     border:1px solid black; display: inline-block;
     border-radius: 5px;
 }

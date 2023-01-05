@@ -29,12 +29,8 @@ export default function TypeDisplay({typeName}:TypeDisplayProps) {
     const colorCode = `${Object.getOwnPropertyDescriptor(typeColors, typeName)?.value}`;
 
     return(
-        <div className='flex-1 border-black border-2 rounded-md p-2' style={{backgroundColor: `${colorCode}`}}>
+        <div className='flex-1 border-black border-2 rounded-md p-2 text-white text-lg font-semibold' style={{backgroundColor: `${colorCode}`}}>
             <p>{typeName.charAt(0).toUpperCase() + typeName.substring(1)}</p>
         </div>
     )
 }
-
-// possível resolução sobre o background: usar um array de objetos para pegar o código hex da cor baseado no tipo do pokémon
-// por enquanto o que "deu certo" (tem hr q funciona e tem hr q n) foi usar as cores no tailwind, e botar o tipo como chave,
-// que aí usa o tipo que recebe por parâmetro da função para definir qual cor usar
