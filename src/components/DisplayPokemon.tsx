@@ -80,7 +80,7 @@ export function DisplayPokemon() {
                 </div>
                 
                 <div className="rounded-md flex justify-center bg-img-pokemon p-2">
-                    <img src={ pokemonData.sprites.other.official_artwork.front_default } alt= {"Foto: "+ pokemonData.name} className="h-32 w-32" />
+                    <img src={ pokemonData.sprites.front_default } alt= {"Foto: "+ pokemonData.name} className="h-32 w-32" />
                 </div>
 
                 <div className="grid grid-cols-3 justify-center mt-2">
