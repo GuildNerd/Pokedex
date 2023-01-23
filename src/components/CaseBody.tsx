@@ -3,6 +3,7 @@ import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import TypeDisplay from "./CaseBottom/TypeDisplay";
 import Display from "./PokemonDisplay/Display";
+import BottomButtons from "./CaseBottom/BottomButtons";
 
 type pokemonModel = {
     name: string,
@@ -74,10 +75,10 @@ export function CaseBody() {
 
     return(
         <div>
-            <Display imgUrl={pokemonData.sprites.front_default} pokemonName={pokemonData.name}></Display>
+            <Display imgUrl={pokemonData.sprites.front_default} pokemonName={pokemonData.name} pokemonType={pokemonData.types[0].type.name}></Display>
             <div className="grid grid-cols-2 mt-4 gap-4">
                 <TypeDisplay typeName={pokemonData.types[0].type.name}/>
-                <div className="flex flex-1 gap-4 justify-center bg-gray-300 rounded-lg px-0 py-1">
+                <div className="flex flex-1 gap-4 justify-center rounded-lg px-0 py-1 border-2 border-black bg-gray-300">
                     <button onClick={ handlePrevPokemon }>
                         <ArrowCircleLeftIcon className="text-gray-900" fontSize="large"/>
                     </button>
@@ -85,6 +86,9 @@ export function CaseBody() {
                         <ArrowCircleRightIcon className="text-gray-900" fontSize="large"/>
                     </button>
                 </div>
+            </div>
+            <div>
+                <BottomButtons></BottomButtons>
             </div>
         </div>
     )

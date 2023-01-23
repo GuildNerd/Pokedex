@@ -12,11 +12,11 @@ body {
     justify-content: center;
 }
 
-.bg-img-pokemon {
+/*.bg-img-pokemon {
     background-image: url(./assets/Oaks-Lab.png);
     background-position: center;
     background-size: 100% 100%;
-}
+}*/
 
 .case-internal {
     border: 1px solid black;
