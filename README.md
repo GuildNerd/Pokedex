@@ -1,2 +1,2 @@
 # Pokedex
-Pokédex criada utilizando React e PokéAPI
+Pokédex created using React, PokéAPI and TailwindCSS
