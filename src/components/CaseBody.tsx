@@ -37,6 +37,11 @@ export function CaseBody() {
     };
 
     const [pokemonData, setPokemonData] = useState(basePokemon);
+    const [isPokemonShown, setIsPokemonShown] = useState(true);
+
+    const handleShowPokemon = () => {
+        setIsPokemonShown(!isPokemonShown);
+    }
 
     async function handlePrevPokemon() {
         if(pokemonData.id > 1) {
@@ -75,9 +80,9 @@ export function CaseBody() {
 
     return(
         <div>
-            <Display imgUrl={pokemonData.sprites.front_default} pokemonName={pokemonData.name} pokemonType={pokemonData.types[0].type.name}></Display>
+            <Display imgUrl={pokemonData.sprites.front_default} pokemonName={pokemonData.name} pokemonType={pokemonData.types[0].type.name} isPokemonShown={isPokemonShown} handleShowPokemon={handleShowPokemon}></Display>
             <div className="grid grid-cols-2 mt-4 gap-4">
-                <TypeDisplay typeName={pokemonData.types[0].type.name}/>
+                <TypeDisplay typeName={pokemonData.types[0].type.name} isShowType={isPokemonShown}/>
                 <div className="flex flex-1 gap-4 justify-center rounded-lg px-0 py-1 border-2 border-black bg-gray-300">
                     <button onClick={ handlePrevPokemon }>
                         <ArrowCircleLeftIcon className="text-gray-900" fontSize="large"/>
