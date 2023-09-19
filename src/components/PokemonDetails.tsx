@@ -1,31 +1,45 @@
-import { pokemonModel } from "../utilities/GetPokemonData"
+export interface PokemonDetailsProps {
+    hp: number,
+    atk: number,
+    def: number,
+    sp_atk: number,
+    sp_def: number,
+    spd: number
+}
 
-export default function PokemonDetails(hp:number, atk:number, def:number, sp_atk:number, sp_def:number, spd:number) {
+export default function PokemonDetails({ hp, atk, def, sp_atk, sp_def, spd }: PokemonDetailsProps) {
+    const numberStyle = { "font-weight": "normal", "color": "black"}
+    
     return (
-        <div className="flex flex-col gap-2">
-            <div className="flex gap-2">
-                <p>HP: </p>
-                <p>{hp}</p>
-            </div>
-            <div className="flex gap-2">
-                <p>ATK: </p>
-                <p>{atk}</p>
-            </div>
-            <div className="flex gap-2">
-                <p>DEF: </p>
-                <p>{def}</p>
-            </div>
-            <div className="flex gap-2">
-                <p>SP-ATK: </p>
-                <p>{sp_atk}</p>
-            </div>
-            <div className="flex gap-2">
-                <p>SP-DEF: </p>
-                <p>{sp_def}</p>
-            </div>
-            <div className="flex gap-2">
-                <p>SPD: </p>
-                <p>{spd}</p>
+        <div className="min-w-[20rem] p-4 flex flex-col gap-2 rounded-r-md bg-red-500">
+            <div className="p-2 bg-white border-[1px] border-black rounded-md font-thin">
+                <div className="flex justify-center">
+                    <h4 className="font-bold">BASE STATS</h4>
+                </div>
+                <div className="flex gap-2">
+                    <p>Health Points: </p>
+                    <p style={numberStyle}>{hp}</p>
+                </div>
+                <div className="flex gap-2">
+                    <p>Attack: </p>
+                    <p style={numberStyle}>{atk}</p>
+                </div>
+                <div className="flex gap-2">
+                    <p>Defense: </p>
+                    <p style={numberStyle}>{def}</p>
+                </div>
+                <div className="flex gap-2">
+                    <p>Special-Attack: </p>
+                    <p style={numberStyle}>{sp_atk}</p>
+                </div>
+                <div className="flex gap-2">
+                    <p>Special-Defense: </p>
+                    <p style={numberStyle}>{sp_def}</p>
+                </div>
+                <div className="flex gap-2">
+                    <p>Speed: </p>
+                    <p style={numberStyle}>{spd}</p>
+                </div>
             </div>
         </div>
     )
