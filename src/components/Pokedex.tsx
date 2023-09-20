@@ -22,6 +22,10 @@ export function Pokedex() {
         setPokemonData(pokemon);
     }
 
+    function handleSearchPokemon(pokemon: pokemonModel) {
+        setPokemonData(pokemon);
+    }
+
     return (
         <div className="flex bg-red-500 rounded-l-md">
             <div className='flex items-center text-center'>
@@ -29,7 +33,7 @@ export function Pokedex() {
                     <div className=''>
                         <div className='bg-red-500 rounded-sm justify-center only:p-6 case-internal'>
                             <PokedexTop></PokedexTop>
-                            <CaseBody pokemonData={pokemonData} handlePrevPokemon={handlePrevPokemon} handleNextPokemon={handleNextPokemon} />
+                            <CaseBody pokemonData={pokemonData} handlePrevPokemon={handlePrevPokemon} handleNextPokemon={handleNextPokemon} handleSearchPokemon={handleSearchPokemon} />
                         </div>
                     </div>
                 </div>

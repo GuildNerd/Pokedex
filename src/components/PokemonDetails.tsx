@@ -8,7 +8,7 @@ export interface PokemonDetailsProps {
 }
 
 export default function PokemonDetails({ hp, atk, def, sp_atk, sp_def, spd }: PokemonDetailsProps) {
-    const numberStyle = { "font-weight": "normal", "color": "black"}
+    const numberStyle = { "fontWeight": "normal", "color": "black"}
     
     return (
         <div className="min-w-[20rem] p-4 flex flex-col gap-2 rounded-r-md bg-red-500">

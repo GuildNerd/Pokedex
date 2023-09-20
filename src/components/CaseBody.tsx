@@ -10,37 +10,44 @@ export interface CaseBodyProps {
     pokemonData: pokemonModel,
     handlePrevPokemon: (pokemon: pokemonModel) => void,
     handleNextPokemon: (pokemon: pokemonModel) => void,
+    handleSearchPokemon: (pokemon: pokemonModel) => void,
 }
 
-export function CaseBody({ pokemonData, handlePrevPokemon, handleNextPokemon }: CaseBodyProps) {
+export function CaseBody({ pokemonData, handlePrevPokemon, handleNextPokemon, handleSearchPokemon }: CaseBodyProps) {
     const [localPokemonData, setLocalPokemonData] = useState(pokemonData);
     const [isPokemonShown, setIsPokemonShown] = useState(true);
+    const [inputSearchContent, setInputSearchContent] = useState("bulbasaur");
 
-    const handleShowPokemon = () => {
+    function handleShowPokemon() {
         setIsPokemonShown(!isPokemonShown);
+    }
+
+    function handleInputSearchChange (content: string) {
+        setInputSearchContent(content);
     }
 
     // receives the type of search (previous, next or specific pokémon) and fetch it from the PokéAPI
     const handleGetPokemon = async (event: React.MouseEvent<HTMLButtonElement>, searchType: string, wantedPokemon: string | number) => {
-        searchType === "prev" && pokemonData.id > 1 ?
+        if (searchType === "prev" && pokemonData.id > 1) {
             await getPokemonData(pokemonData.id - 1)
                 .then((data) => {
                     setLocalPokemonData(data);
                     handlePrevPokemon(data);
                 })
-            :
-        searchType === "next" ?
+        }
+        else if (searchType === "next")
             await getPokemonData(pokemonData.id + 1)
                 .then((data) => {
                     setLocalPokemonData(data);
                     handleNextPokemon(data);
                 })
-        :
+        else if(searchType === "search"){
             await getPokemonData(wantedPokemon)
                 .then((data) => {
                     setLocalPokemonData(data);
-                    handleNextPokemon(data);
+                    handleSearchPokemon(data);
                 });
+        }
     }
 
     return (
@@ -58,7 +65,7 @@ export function CaseBody({ pokemonData, handlePrevPokemon, handleNextPokemon }: 
                 </div>
             </div>
             <div>
-                <SearchBar />
+                <SearchBar onClickSearch={(event) => handleGetPokemon(event, "search", inputSearchContent)} onInputChange={(content) => handleInputSearchChange(content)}/>
             </div>
         </div>
     )
