@@ -11,7 +11,7 @@ export default function PokemonDetails({ hp, atk, def, sp_atk, sp_def, spd }: Po
     const numberStyle = { "fontWeight": "normal", "color": "black"}
     
     return (
-        <div className="min-w-[20rem] p-4 flex flex-col gap-2 rounded-r-md bg-red-500">
+        <div className="min-w-[20rem] p-4 flex flex-col gap-2 rounded-md bg-red-500 border-[1px] border-black">
             <div className="p-2 bg-white border-[1px] border-black rounded-md font-thin">
                 <div className="flex justify-center">
                     <h4 className="font-bold">BASE STATS</h4>

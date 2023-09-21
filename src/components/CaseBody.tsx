@@ -22,31 +22,42 @@ export function CaseBody({ pokemonData, handlePrevPokemon, handleNextPokemon, ha
         setIsPokemonShown(!isPokemonShown);
     }
 
-    function handleInputSearchChange (content: string) {
+    function handleInputSearchChange(content: string) {
         setInputSearchContent(content);
     }
 
     // receives the type of search (previous, next or specific pokémon) and fetch it from the PokéAPI
-    const handleGetPokemon = async (event: React.MouseEvent<HTMLButtonElement>, searchType: string, wantedPokemon: string | number) => {
+    const handleGetPokemon = async (searchType: string, wantedPokemon: string | number) => {
         if (searchType === "prev" && pokemonData.id > 1) {
-            await getPokemonData(pokemonData.id - 1)
-                .then((data) => {
-                    setLocalPokemonData(data);
-                    handlePrevPokemon(data);
-                })
+            try {
+                let data = await getPokemonData(pokemonData.id - 1)
+                setLocalPokemonData(data);
+                handlePrevPokemon(data);
+            }
+            catch {
+
+            }
         }
-        else if (searchType === "next")
-            await getPokemonData(pokemonData.id + 1)
-                .then((data) => {
-                    setLocalPokemonData(data);
-                    handleNextPokemon(data);
-                })
-        else if(searchType === "search"){
-            await getPokemonData(wantedPokemon)
-                .then((data) => {
-                    setLocalPokemonData(data);
-                    handleSearchPokemon(data);
-                });
+        else if (searchType === "next") {
+            try {
+                let data = await getPokemonData(pokemonData.id + 1)
+                setLocalPokemonData(data);
+                handleNextPokemon(data);
+            }
+            catch {
+
+            }
+        }
+        else if (searchType === "search") {
+            try {
+                let data = await getPokemonData(wantedPokemon)
+                setLocalPokemonData(data);
+                handleSearchPokemon(data);
+            }
+            catch {
+
+            }
+
         }
     }
 
@@ -56,16 +67,16 @@ export function CaseBody({ pokemonData, handlePrevPokemon, handleNextPokemon, ha
             <div className="grid grid-cols-2 mt-4 gap-4">
                 <TypeDisplay typeName={localPokemonData.types[0].type.name} isShowType={isPokemonShown} />
                 <div className="flex flex-1 gap-4 justify-center rounded-lg px-0 py-1 border-2 border-black bg-gray-300">
-                    <button onClick={(event) => handleGetPokemon(event, "prev", "")}>
+                    <button onClick={() => handleGetPokemon("prev", "")}>
                         <ArrowCircleLeftIcon className="text-gray-900" fontSize="large" />
                     </button>
-                    <button onClick={(event) => handleGetPokemon(event, "next", "")}>
+                    <button onClick={() => handleGetPokemon("next", "")}>
                         <ArrowCircleRightIcon className="text-gray-900" fontSize="large" />
                     </button>
                 </div>
             </div>
             <div>
-                <SearchBar onClickSearch={(event) => handleGetPokemon(event, "search", inputSearchContent)} onInputChange={(content) => handleInputSearchChange(content)}/>
+                <SearchBar onClickSearch={() => handleGetPokemon("search", inputSearchContent)} onInputChange={(content) => handleInputSearchChange(content)} />
             </div>
         </div>
     )

@@ -27,7 +27,7 @@ export function Pokedex() {
     }
 
     return (
-        <div className="flex bg-red-500 rounded-l-md">
+        <div className="flex bg-red-500 rounded-md">
             <div className='flex items-center text-center'>
                 <div className='bg-red-500 case-3d'>
                     <div className=''>

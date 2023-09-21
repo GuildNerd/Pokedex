@@ -6,7 +6,8 @@ body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    background-image: linear-gradient(#0000, green);
+    background-image: url('./assets/Oaks-Lab.png');
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
